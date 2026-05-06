@@ -270,11 +270,27 @@
     font-size: 0.78rem; font-weight: 700;
     cursor: pointer; transition: all 0.15s;
     display: flex; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    outline: none;
   }
+  .entry-btn:focus { outline: none; }
+  .entry-btn:focus-visible { outline: none; box-shadow: none; }
+  .entry-btn:focus:not(:focus-visible) { outline: none; box-shadow: none; background: inherit; }
+  .entry-btn.selected-1:focus { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .entry-btn.selected-2:focus { background: var(--green); border-color: var(--green); color: var(--white); }
+  .entry-btn:active { opacity: 0.85; }
   .entry-btn:hover:not(:disabled) { border-color: var(--navy); color: var(--navy); background: var(--off-white); }
   .entry-btn.selected-1 { background: var(--navy); border-color: var(--navy); color: var(--white); }
   .entry-btn.selected-2 { background: var(--green); border-color: var(--green); color: var(--white); }
   .entry-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .entry-btn:focus { outline: none; }
+  .entry-btn:focus-visible { outline: none; box-shadow: none; }
+  .entry-btn:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+  .entry-btn:not(.selected-1):not(.selected-2):focus { background: var(--white); border-color: var(--border); color: #6a7a9a; }
+  .entry-btn.selected-1:focus { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .entry-btn.selected-2:focus { background: var(--green); border-color: var(--green); color: var(--white); }
+  .entry-btn:active { opacity: 0.85; }
   .entry-btn-label { font-size: 0.68rem; color: #6a7a9a; text-align: center; margin-top: 0.15rem; }
 
   /* YOUTH SECTION */
