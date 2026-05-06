@@ -1366,7 +1366,7 @@ async function submitForm() {
   const allCls = Object.values(CLASSES).flat();
   const entryList = allCls
     .filter(c => selections[c.code] > 0)
-    .map(c => `${c.code}:${selections[c.code]}`)
+    .map(c => `${c.code} ${c.name}:${selections[c.code]}`)
     .join(', ');
 
   const payload = {
