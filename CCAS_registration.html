@@ -276,6 +276,8 @@
   }
   .entry-btn:focus { outline: none; }
   .entry-btn:active { opacity: 0.85; }
+  .entry-btn:focus-visible { outline: none; box-shadow: none; }
+  .entry-btn:focus:not(:focus-visible) { outline: none; box-shadow: none; background: inherit; }
   .entry-btn:hover:not(:disabled) { border-color: var(--navy); color: var(--navy); background: var(--off-white); }
   .entry-btn.selected-1 { background: var(--navy); border-color: var(--navy); color: var(--white); }
   .entry-btn.selected-2 { background: var(--green); border-color: var(--green); color: var(--white); }
