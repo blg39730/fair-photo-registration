@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Clinton County Fair — Photography Contest Entry</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-dark: #111a30;
+    --navy-mid: #243058;
+    --red: #c0392b;
+    --red-dark: #a93226;
+    --white: #ffffff;
+    --off-white: #f5f6f8;
+    --light-gray: #e8eaee;
+    --mid-gray: #b0b8c8;
+    --text: #1a2744;
+    --text-light: #4a5568;
+    --border: #d0d6e0;
+    --card-bg: #ffffff;
+    --shadow: 0 2px 12px rgba(26,39,68,0.10);
+    --green: #1a6b3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--off-white);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--navy-dark);
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .top-bar img { height: 48px; width: auto; }
+  .top-bar-text { color: var(--mid-gray); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .top-bar-text strong { color: var(--white); font-size: 0.85rem; display: block; letter-spacing: 0.02em; text-transform: none; }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 2.5rem 1rem 2.2rem;
+    border-bottom: 5px solid var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 22px,
+      rgba(255,255,255,0.025) 22px,
+      rgba(255,255,255,0.025) 44px
+    );
+  }
+  header .ribbon {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 1.4rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    position: relative;
+  }
+  header h1 span { color: #f0c040; }
+  header p {
+    margin-top: 0.8rem;
+    font-size: 0.93rem;
+    color: #a0aec0;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: var(--navy-dark);
+    padding: 0 1rem 1.2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .progress-steps { display: flex; align-items: center; }
+  .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #2a3a5a;
+    border: 2px solid #3a4a6a;
+    color: #6a7a9a;
+    font-size: 0.8rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .step-dot.active { background: var(--red); border-color: #e05040; color: var(--white); }
+  .step-dot.done   { background: var(--green); border-color: #2a8a4a; color: var(--white); }
+  .step-line { width: 48px; height: 2px; background: #2a3a5a; transition: background 0.3s; }
+  .step-line.done { background: var(--green); }
+  .step-label { font-size: 0.68rem; color: #6a7a9a; text-align: center; margin-top: 0.3rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .step-wrap { display: flex; flex-direction: column; align-items: center; }
+
+  /* MAIN */
+  main { max-width: 760px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+  /* NOTICE */
+  .notice {
+    background: #eef2f8;
+    border-left: 4px solid var(--navy);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+  .notice strong { color: var(--navy); }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--navy);
+    border-bottom: 3px solid var(--red);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.4rem;
+    margin-top: 2rem;
+  }
+  .section-title:first-of-type { margin-top: 0; }
+
+  /* FORM FIELDS */
+  .field-row { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .field-row.two   { grid-template-columns: 1fr 1fr; }
+  .field-row.three { grid-template-columns: 2fr 1fr 2fr; }
+  .field-row.addr  { grid-template-columns: 2fr 1fr 1fr; }
+
+  .field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .field label {
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase; letter-spacing: 0.07em;
+  }
+  .field label .req { color: var(--red); margin-left: 2px; }
+  .field input, .field select {
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 0.55rem 0.75rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    background: var(--white);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(26,39,68,0.12);
+  }
+  .field input.error, .field select.error { border-color: var(--red); background: #fff8f8; }
+  .field .hint { font-size: 0.78rem; color: #6a7a9a; margin-top: 0.1rem; }
+  .field .field-error {
+    font-size: 0.78rem; color: var(--red);
+    margin-top: 0.2rem; display: none; align-items: center; gap: 0.3rem;
+  }
+  .field .field-error.visible { display: flex; }
+  .field .field-error::before { content: '⚠'; font-size: 0.75rem; }
+
+  /* ENTRY COUNTER */
+  .entry-counter-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: -2rem -1rem 1.8rem;
+    padding: 0 1rem;
+  }
+  .entry-counter {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 0 0 6px 6px;
+    padding: 0.75rem 1.4rem;
+    margin-bottom: 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .entry-counter .label { font-size: 0.82rem; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.08em; }
+  .entry-counter .count { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #f0c040; line-height: 1; }
+  .entry-counter .count span { font-size: 1rem; color: #6a7a9a; font-family: 'Source Sans 3', sans-serif; font-weight: 400; }
+  .counter-bar-wrap { flex: 1; height: 8px; background: #2a3a5a; border-radius: 4px; overflow: hidden; }
+  .counter-bar { height: 100%; background: #f0c040; border-radius: 4px; transition: width 0.4s ease; }
+  .counter-bar.warn { background: #e87a20; }
+  .counter-bar.full { background: var(--red); }
+
+  /* DIVISION CARDS */
+  .division-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 1.4rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .division-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.7rem 1.1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .division-badge {
+    background: var(--red);
+    color: var(--white);
+    font-weight: 700; font-size: 0.78rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px; letter-spacing: 0.05em; white-space: nowrap;
+  }
+  .division-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; }
+  .division-note { margin-left: auto; font-size: 0.75rem; color: var(--mid-gray); white-space: nowrap; }
+  .division-body { padding: 0.8rem 1.1rem; }
+
+  /* CLASS ROWS */
+  .class-row {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; padding: 0.5rem 0;
+    border-bottom: 1px solid var(--light-gray); gap: 1rem;
+  }
+  .class-row:last-child { border-bottom: none; }
+  .class-info { display: flex; flex-direction: column; gap: 0.1rem; }
+  .class-code { font-size: 0.72rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
+  .class-name { font-size: 0.95rem; color: var(--text); }
+
+  /* ENTRY BUTTONS */
+  .entry-btn-group { display: flex; gap: 0.4rem; }
+  .entry-btn {
+    width: 36px; height: 36px;
+    border-radius: 4px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: #6a7a9a;
+    font-size: 0.78rem; font-weight: 700;
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .entry-btn:hover:not(:disabled) { border-color: var(--navy); color: var(--navy); background: var(--off-white); }
+  .entry-btn.selected-1 { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .entry-btn.selected-2 { background: var(--green); border-color: var(--green); color: var(--white); }
+  .entry-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .entry-btn-label { font-size: 0.68rem; color: #6a7a9a; text-align: center; margin-top: 0.15rem; }
+
+  /* YOUTH SECTION */
+  #youth-section { display: none; }
+  #youth-section.visible { display: block; }
+
+  /* REVIEW */
+  .review-section { margin-bottom: 1.8rem; }
+  .review-section h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    color: var(--navy); border-bottom: 2px solid var(--red);
+    padding-bottom: 0.4rem; margin-bottom: 0.8rem;
+  }
+  .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; }
+  .review-item { font-size: 0.9rem; }
+  .review-item .rlabel { font-size: 0.75rem; color: #6a7a9a; text-transform: uppercase; letter-spacing: 0.06em; }
+  .review-item .rval { color: var(--text); font-weight: 600; }
+  .review-entries { display: flex; flex-direction: column; gap: 0.4rem; }
+  .review-entry-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--off-white); border: 1px solid var(--border);
+    border-radius: 4px; padding: 0.45rem 0.8rem; font-size: 0.88rem;
+  }
+  .review-entry-row .recode { color: var(--red); font-weight: 700; font-size: 0.78rem; }
+  .review-entry-row .recount {
+    background: var(--green); color: var(--white);
+    border-radius: 3px; padding: 0.1rem 0.5rem;
+    font-size: 0.78rem; font-weight: 700;
+  }
+  .review-entry-row .recount.one { background: var(--navy); color: var(--white); }
+  .review-division { margin-bottom: 1rem; }
+  .review-division-header {
+    background: var(--navy);
+    color: var(--white);
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 4px 4px 0 0;
+    font-size: 0.88rem;
+  }
+  .review-div-badge {
+    background: var(--red); color: var(--white);
+    font-size: 0.7rem; font-weight: 700;
+    padding: 0.1rem 0.5rem; border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+  .review-div-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; }
+  .review-div-count { margin-left: auto; font-size: 0.78rem; color: var(--mid-gray); }
+  .review-division .review-entry-row { border-radius: 0; border-top: none; }
+  .review-division .review-entry-row:last-child { border-radius: 0 0 4px 4px; }
+
+  .review-total {
+    background: var(--navy); color: var(--white);
+    border-radius: 4px; padding: 0.6rem 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.9rem; margin-top: 0.6rem;
+  }
+  .review-total strong { color: #f0c040; font-size: 1.1rem; }
+
+  /* SUCCESS */
+  .success-box { text-align: center; padding: 3rem 1.5rem; }
+  .success-icon {
+    width: 72px; height: 72px; background: var(--green);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem; font-size: 2rem;
+  }
+  .success-box h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin-bottom: 0.8rem; }
+  .success-box p { color: var(--text-light); line-height: 1.7; max-width: 480px; margin: 0 auto; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.7rem 2rem; border-radius: 4px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; border: none; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-secondary { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+  .btn-secondary:hover { border-color: var(--navy); color: var(--navy); }
+  .btn-submit { background: var(--red); color: var(--white); }
+  .btn-submit:hover { background: var(--red-dark); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ERROR MSG */
+  .error-msg {
+    background: #fff5f5; border-left: 4px solid var(--red);
+    border-radius: 4px; padding: 0.8rem 1rem;
+    font-size: 0.88rem; color: var(--red);
+    margin-bottom: 1.2rem; display: none;
+  }
+  .error-msg.visible { display: block; }
+
+  /* COST ESTIMATE */
+  .cost-estimate {
+    background: var(--off-white);
+    border: 2px solid var(--navy);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 0;
+  }
+  .cost-estimate-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.6rem 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .cost-estimate-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    border: none; padding: 0; margin: 0; color: var(--white);
+  }
+  .cost-estimate-header .est-badge {
+    margin-left: auto;
+    background: #f0c040; color: var(--navy);
+    font-size: 0.68rem; font-weight: 700;
+    padding: 0.15rem 0.5rem; border-radius: 3px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .cost-body { padding: 1rem 1.1rem; }
+  .cost-line {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.4rem 0; border-bottom: 1px solid var(--light-gray);
+    font-size: 0.9rem;
+  }
+  .cost-line:last-of-type { border-bottom: none; }
+  .cost-line .cost-label { color: var(--text-light); }
+  .cost-line .cost-val { font-weight: 600; color: var(--text); }
+  .cost-line .cost-val.free { color: var(--green); }
+  .cost-line .cost-val.charge { color: var(--red); }
+  .cost-total {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--navy); color: var(--white);
+    padding: 0.65rem 1rem; margin: 0.8rem -1.1rem -1rem;
+    font-size: 0.95rem; font-weight: 600;
+  }
+  .cost-total .total-amt { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #f0c040; }
+  .cost-disclaimer {
+    font-size: 0.78rem; color: var(--text-light);
+    background: #fffbe6; border: 1px solid #f0c040;
+    border-radius: 4px; padding: 0.6rem 0.8rem;
+    margin-top: 1rem; line-height: 1.5;
+  }
+  .cost-disclaimer strong { color: var(--navy); }
+
+  /* DROP-OFF INFO */
+  .dropoff-box {
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 1.4rem;
+  }
+  .dropoff-header {
+    background: var(--red);
+    color: var(--white);
+    padding: 0.6rem 1rem;
+  }
+  .dropoff-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    border: none; padding: 0; margin: 0; color: var(--white);
+  }
+  .dropoff-body { padding: 0.9rem 1.1rem; display: flex; flex-direction: column; gap: 0.8rem; }
+  .dropoff-day {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    align-items: start;
+  }
+  .dropoff-day-badge {
+    background: var(--navy); color: var(--white);
+    font-size: 0.72rem; font-weight: 700;
+    padding: 0.2rem 0.6rem; border-radius: 3px;
+    white-space: nowrap; letter-spacing: 0.04em;
+    margin-top: 0.1rem;
+  }
+  .dropoff-day-info { font-size: 0.9rem; line-height: 1.6; }
+  .dropoff-day-info strong { color: var(--navy); display: block; }
+  .dropoff-day-info span { color: var(--text-light); }
+  .dropoff-divider { height: 1px; background: var(--light-gray); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy-dark);
+    color: var(--mid-gray);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.82rem;
+    margin-top: 2rem;
+    border-top: 3px solid var(--red);
+  }
+  footer a { color: var(--mid-gray); text-decoration: none; }
+  footer a:hover { color: var(--white); }
+
+  /* SPINNER */
+  .spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; margin-left: 0.5rem; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── TABLET (max 768px) ── */
+  @media (max-width: 768px) {
+    .field-row.three { grid-template-columns: 1fr 80px; }
+    .field-row.three .field:last-child { grid-column: 1 / -1; }
+    .step-line { width: 28px; }
+    .top-bar-text { display: none; }
+  }
+
+  /* ── MOBILE (max 560px) ── */
+  @media (max-width: 560px) {
+    /* Layout */
+    main { padding: 1rem 0.75rem 3rem; }
+
+    /* Top bar — logo only, no address text */
+    .top-bar { padding: 0.5rem 0.75rem; }
+    .top-bar img { height: 36px; }
+    .top-bar-text { display: none; }
+
+    /* Header */
+    header { padding: 1.5rem 0.75rem 1.4rem; }
+    header h1 { font-size: 1.5rem; }
+    header p { font-size: 0.82rem; }
+
+    /* Progress steps — smaller dots, shorter lines */
+    .step-dot { width: 26px; height: 26px; font-size: 0.72rem; }
+    .step-line { width: 20px; }
+    .step-label { font-size: 0.6rem; }
+    .progress-wrap { padding: 0 0.5rem 1rem; }
+
+    /* Form fields — all single column */
+    .field-row.two,
+    .field-row.three,
+    .field-row.addr { grid-template-columns: 1fr; }
+
+    /* Make Middle Initial inline with First Name on mobile */
+    .name-row { display: grid; grid-template-columns: 1fr 70px 1fr; gap: 0.75rem; }
+
+    /* Larger touch targets for inputs */
+    .field input, .field select {
+      padding: 0.7rem 0.75rem;
+      font-size: 1rem;
+    }
+
+    /* Entry counter */
+    .entry-counter { flex-wrap: wrap; gap: 0.6rem; padding: 0.7rem 1rem; }
+    .entry-counter .count { font-size: 1.6rem; }
+    .counter-bar-wrap { width: 100%; flex: none; }
+    .entry-counter-sticky { margin: -1rem -0.75rem 1.4rem; padding: 0 0.75rem; }
+
+    /* Division cards */
+    .division-header { padding: 0.6rem 0.85rem; flex-wrap: wrap; gap: 0.4rem; }
+    .division-note { width: 100%; font-size: 0.7rem; margin-left: 0; }
+    .division-body { padding: 0.5rem 0.85rem; }
+
+    /* Class rows — stack label above buttons */
+    .class-row {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+      padding: 0.6rem 0;
+    }
+    .class-name { font-size: 0.9rem; }
+
+    /* Entry buttons — larger for fat fingers */
+    .entry-btn { width: 44px; height: 44px; font-size: 0.85rem; }
+    .entry-btn-label { font-size: 0.65rem; }
+
+    /* Review page */
+    .review-grid { grid-template-columns: 1fr; }
+    .review-division-header { flex-wrap: wrap; }
+    .cost-total { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    .total-amt { font-size: 1.2rem; }
+
+    /* Drop-off box */
+    .dropoff-day { grid-template-columns: 1fr; gap: 0.3rem; }
+    .dropoff-day-badge { display: inline-block; margin-bottom: 0.2rem; }
+
+    /* Buttons */
+    .btn-row { flex-direction: column-reverse; }
+    .btn { width: 100%; text-align: center; padding: 0.85rem 1rem; font-size: 1rem; }
+
+    /* Success page buttons */
+    .success-box { padding: 2rem 0.75rem; }
+    .success-box h2 { font-size: 1.5rem; }
+
+    /* Notice box */
+    .notice { font-size: 0.85rem; padding: 0.85rem 1rem; }
+
+    /* Section titles */
+    .section-title { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <img src="https://clintoncountyfairgrounds.com/wp-content/uploads/2023/04/CC-Agricultural-Society-Logo.png" alt="Clinton County Agricultural Society Logo">
+  <div class="top-bar-text">
+    <strong>Clinton County Agricultural Society</strong>
+    958 W Main Street &nbsp;|&nbsp; Wilmington, OH 45177
+  </div>
+</div>
+<header>
+  <div class="ribbon">Clinton County Fair 2026</div>
+  <h1>Photography <span>Contest</span> Entry</h1>
+  <p>Complete your registration below. All entries are subject to the official contest rules. Questions? Email <strong style="color:#f0c040">photosclintoncountyfair@gmail.com</strong></p>
+  <div style="margin-top:1.1rem;position:relative;">
+    <a href="2026_Fair_Photo_Contest_Rev3.pdf" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.12);
+              border:1.5px solid rgba(255,255,255,0.3);color:#fff;text-decoration:none;
+              padding:0.45rem 1.1rem;border-radius:4px;font-size:0.85rem;font-weight:600;
+              letter-spacing:0.03em;transition:background 0.2s;"
+       onmouseover="this.style.background='rgba(255,255,255,0.22)'"
+       onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+      📄 View Official Contest Rules (PDF)
+    </a>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem">
+    <div class="progress-steps">
+      <div class="step-wrap"><div class="step-dot active" id="dot1">1</div><div class="step-label">Your Info</div></div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-wrap"><div class="step-dot" id="dot2">2</div><div class="step-label">Entries</div></div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-wrap"><div class="step-dot" id="dot3">3</div><div class="step-label">Review</div></div>
+      <div class="step-line" id="line3"></div>
+      <div class="step-wrap"><div class="step-dot" id="dot4">4</div><div class="step-label">Done</div></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- PAGE 1: PERSONAL INFO -->
+  <div class="page active" id="page1">
+    <div class="notice">
+      <strong>Before you begin:</strong> Your phone and email are only used if we need to contact you about your registration. Your mailing address is used to send any prize winnings. Your information is used only for fair registration purposes and will not be shared with third parties.<br><br>
+      📋 <strong>Please read the official rules before registering:</strong>
+      <a href="2026_Fair_Photo_Contest_Rev3.pdf" target="_blank" rel="noopener"
+         style="color:var(--navy);font-weight:700;text-decoration:underline;">
+        2026 Clinton County Fair Photography Contest Rules (PDF) ↗
+      </a>
+    </div>
+
+    <p class="section-title">Personal Information</p>
+
+    <div class="field-row three name-row">
+      <div class="field">
+        <label>First Name <span class="req">*</span></label>
+        <input type="text" id="firstName" placeholder="Jane" oninput="clearError('firstName')">
+        <span class="field-error" id="err-firstName">First Name is required</span>
+      </div>
+      <div class="field">
+        <label>Middle Initial</label>
+        <input type="text" id="middleInitial" maxlength="1" placeholder="A">
+      </div>
+      <div class="field">
+        <label>Last Name <span class="req">*</span></label>
+        <input type="text" id="lastName" placeholder="Smith" oninput="clearError('lastName')">
+        <span class="field-error" id="err-lastName">Last Name is required</span>
+      </div>
+    </div>
+
+    <div class="field-row two">
+      <div class="field">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="text" id="phone" placeholder="(937) 555-0100" inputmode="numeric" maxlength="14" oninput="formatPhone(this)">
+        <span class="hint">Numbers only — we’ll format it for you</span>
+        <span class="field-error" id="err-phone">Please enter a valid 10-digit phone number</span>
+      </div>
+      <div class="field">
+        <label>Email Address <span class="req">*</span> <span style="font-weight:400;text-transform:none;font-size:0.78rem;color:var(--text-light);letter-spacing:0;">&mdash; your confirmation will be sent here</span></label>
+        <input type="email" id="email" placeholder="jane@example.com" oninput="clearFieldError('email')" onblur="validateEmail()">
+        <span class="field-error" id="err-email">Please enter a valid email address (e.g. jane@example.com)</span>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Was the participant 18 or younger on January 1, 2026? <span class="req">*</span></label>
+        <select id="ageCategory" onchange="onAgeCategoryChange()">
+          <option value="">— Select —</option>
+          <option value="No">No</option>
+          <option value="Yes - 13 or younger">Yes — 13 or younger</option>
+          <option value="Yes - 14 to 18">Yes — 14 to 18 years old</option>
+        </select>
+        <span class="field-error" id="err-ageCategory">Please select an answer for the age question</span>
+      </div>
+    </div>
+
+    <div class="field-row" id="fourh-row" style="display:none;">
+      <div class="field">
+        <label>Do you have a 4-H Youth Wristband? <span class="req">*</span></label>
+        <select id="fourhWristband" onchange="onFourhChange()">
+          <option value="">— Select —</option>
+          <option value="No">No — I will purchase a Season Pass</option>
+          <option value="Yes">Yes — I have a 4-H Youth Wristband</option>
+        </select>
+        <span class="field-error" id="err-fourhWristband">Please indicate whether you have a 4-H Youth Wristband</span>
+        <span class="hint" id="fourh-hint" style="display:none;color:var(--red);font-weight:600;">
+          ⚠ You must present your 4-H Youth Wristband at drop-off. Wristbands are non-transferable and may not be shared.
+        </span>
+      </div>
+    </div>
+
+    <p class="section-title">Mailing Address</p>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Street Address <span class="req">*</span></label>
+        <input type="text" id="street" placeholder="123 Main St" oninput="clearError('street')">
+        <span class="field-error" id="err-street">Please enter a valid street address (e.g. 123 Main St)</span>
+      </div>
+    </div>
+    <div class="field-row addr">
+      <div class="field">
+        <label>City <span class="req">*</span></label>
+        <input type="text" id="city" placeholder="Wilmington" oninput="clearError('city')">
+        <span class="field-error" id="err-city">City is required</span>
+      </div>
+      <div class="field">
+        <label>State <span class="req">*</span></label>
+        <input type="text" id="state" maxlength="2" placeholder="OH" oninput="formatState(this)" onblur="validateState()">
+        <span class="field-error" id="err-state">Please enter a valid 2-letter US state abbreviation (e.g. OH)</span>
+      </div>
+      <div class="field">
+        <label>Zip Code <span class="req">*</span></label>
+        <input type="text" id="zip" maxlength="10" placeholder="45177" inputmode="numeric" oninput="formatZip(this)" onblur="validateZip()">
+        <span class="field-error" id="err-zip">Please enter a valid 5-digit zip code (e.g. 45177)</span>
+      </div>
+    </div>
+
+    <div class="error-msg" id="error1">
+      Please complete the following required fields:
+      <ul id="error1List" style="margin-top:0.5rem;margin-left:1.2rem;line-height:2;"></ul>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goToPage2()">Next: Select Entries →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2: ENTRIES -->
+  <div class="page" id="page2">
+
+    <div class="entry-counter-sticky">
+      <div class="entry-counter">
+        <div>
+          <div class="label">Total Entries Selected</div>
+          <div class="count"><span id="countNum">0</span> <span>/ 30</span></div>
+        </div>
+        <div class="counter-bar-wrap">
+          <div class="counter-bar" id="counterBar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice">
+      For each class, select how many entries you are submitting using the <strong>1</strong> or <strong>2</strong> buttons. Click again to deselect. You may enter a maximum of <strong>30 total entries</strong> across all divisions.
+    </div>
+
+    <!-- YOUTH DIVISION (conditional) -->
+    <div id="youth-section">
+      <p class="section-title">Youth Division</p>
+      <div class="division-card">
+        <div class="division-header">
+          <span class="division-badge">Y01</span>
+          <span class="division-name">Youth</span>
+          <span class="division-note">Up to 2 entries per class</span>
+        </div>
+        <div class="division-body" id="div-Y01"></div>
+      </div>
+    </div>
+
+    <p class="section-title">Open Divisions</p>
+
+    <div class="division-card">
+      <div class="division-header">
+        <span class="division-badge">01</span>
+        <span class="division-name">Color</span>
+        <span class="division-note">Up to 2 entries per class</span>
+      </div>
+      <div class="division-body" id="div-01"></div>
+    </div>
+
+    <div class="division-card">
+      <div class="division-header">
+        <span class="division-badge">02</span>
+        <span class="division-name">Black and White</span>
+        <span class="division-note">Up to 2 entries per class</span>
+      </div>
+      <div class="division-body" id="div-02"></div>
+    </div>
+
+    <div class="division-card">
+      <div class="division-header">
+        <span class="division-badge">03</span>
+        <span class="division-name">Framed and Matted</span>
+        <span class="division-note">1 entry per class</span>
+      </div>
+      <div class="division-body" id="div-03"></div>
+    </div>
+
+    <div class="error-msg" id="error2">Please select at least one entry before continuing.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToPage(1)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage3()">Next: Review →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3: REVIEW -->
+  <div class="page" id="page3">
+    <div class="notice">Please review your information carefully before submitting.</div>
+
+    <div class="review-section">
+      <h3>Personal Information</h3>
+      <div class="review-grid" id="reviewPersonal"></div>
+    </div>
+
+    <div class="review-section">
+      <h3>Your Entries</h3>
+      <div class="review-entries" id="reviewEntries"></div>
+    </div>
+
+    <div class="review-section">
+      <div class="cost-estimate">
+        <div class="cost-estimate-header">
+          <h3>Estimated Cost</h3>
+          <span class="est-badge">Estimate Only</span>
+        </div>
+        <div class="cost-body">
+          <div class="cost-line" id="passLine">
+            <span class="cost-label">Season Pass / Fair Membership Pass <em style="font-size:0.78rem;color:var(--red)">(required)</em></span>
+            <span class="cost-val">$40.00</span>
+          </div>
+          <div class="cost-line">
+            <span class="cost-label">Free entries included with Season Pass</span>
+            <span class="cost-val free">15 free</span>
+          </div>
+          <div class="cost-line" id="extraEntriesLine">
+            <span class="cost-label">Additional entries (<span id="extraCount">0</span> × $2.00)</span>
+            <span class="cost-val charge" id="extraCost">$0.00</span>
+          </div>
+          <div class="cost-total">
+            <span>Estimated Total Due at Drop-Off</span>
+            <span class="total-amt" id="estimatedTotal">$40.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="cost-disclaimer">
+        <strong>⚠ This is an estimate only.</strong> Your final cost will be confirmed at drop-off.<br><br>
+        A <strong>Season Pass / Fair Membership Pass or 4-H Youth Wristband is required</strong> to participate. Season Pass / Fair Membership Pass ($40) includes 15 free entries. A 4-H wristband includes 10 free entries. Additional entries beyond your included amount are $2.00 each. Passes and wristbands are non-transferable and may not be shared or combined.
+      </div>
+
+      <div class="dropoff-box">
+        <div class="dropoff-header"><h3>📍 Entry Drop-Off Information</h3></div>
+        <div class="dropoff-body">
+          <div class="dropoff-day">
+            <span class="dropoff-day-badge">Day 1</span>
+            <div class="dropoff-day-info">
+              <strong>Monday, June 15th</strong>
+              <span>6:00 PM – 8:00 PM &nbsp;|&nbsp; Floral Hall</span>
+            </div>
+          </div>
+          <div class="dropoff-divider"></div>
+          <div class="dropoff-day">
+            <span class="dropoff-day-badge">Day 2</span>
+            <div class="dropoff-day-info">
+              <strong>Monday, June 22nd</strong>
+              <span>6:00 PM – 8:00 PM &nbsp;|&nbsp; Floral Hall</span>
+            </div>
+          </div>
+          <div class="dropoff-divider"></div>
+          <div id="wristband-reminder" style="display:none;background:#fff8e6;border:1.5px solid #f0c040;border-radius:4px;padding:0.65rem 0.9rem;font-size:0.88rem;color:var(--navy);line-height:1.5;">
+            🎫 <strong>4-H Wristband Reminder:</strong> You must present your 4-H Youth Wristband at drop-off. Wristbands are non-transferable and may not be shared or combined with other passes.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-msg" id="error3">There was a problem submitting your form. Please try again or email photosclintoncountyfair@gmail.com</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToPage(2)">← Edit Entries</button>
+      <button class="btn btn-submit" id="submitBtn" onclick="submitForm()">
+        Submit Registration
+        <span class="spinner" id="spinner"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 4: SUCCESS -->
+  <div class="page" id="page4">
+    <div class="success-box">
+      <div class="success-icon">✓</div>
+      <h2>Registration Submitted!</h2>
+      <p>Thank you for entering the 2026 Clinton County Fair Photography Contest. A confirmation has been recorded. If you have any questions, please email <strong>photosclintoncountyfair@gmail.com</strong>.</p>
+
+      <div style="margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem;">
+
+        <p style="font-size:0.9rem;color:var(--text-light);max-width:420px;">
+          Registering another family member? You can carry over the contact info and address to save time.
+        </p>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+          <button class="btn btn-primary" onclick="startNewEntry(true)">
+            + Register Another — Keep Contact Info
+          </button>
+          <button class="btn btn-secondary" onclick="startNewEntry(false)">
+            + Register Another — Start Fresh
+          </button>
+        </div>
+
+      </div>
+
+      <div style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--light-gray);font-size:0.78rem;color:var(--text-light);max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;">
+        🔒 <strong style="color:var(--navy)">Privacy Notice:</strong> Your personal information is used only for Clinton County Fair registration purposes and will not be shared with third parties.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const CLASSES = {
+  'Y01': [
+    { code:'Y01A', name:'13 and under (Open)', max:2 },
+    { code:'Y01B', name:'14-18 (Open)', max:2 },
+  ],
+  '01': [
+    { code:'01A', name:'People', max:2 },
+    { code:'01B', name:'Landscape / Waterscape', max:2 },
+    { code:'01C', name:'Animals / Insects', max:2 },
+    { code:'01D', name:'Still Life', max:2 },
+    { code:'01E', name:'Flowers', max:2 },
+    { code:'01F', name:'Architecture / Structures', max:2 },
+    { code:'01G', name:'Open', max:2 },
+    { code:'01H', name:'Sunrises / Sunsets', max:2 },
+    { code:'01J', name:'* Agriculture', max:2 },
+    { code:'01K', name:'* All Things Fair', max:2 },
+    { code:'01L', name:'* Restaurant and Food', max:2 },
+    { code:'01M', name:'* The Arts', max:2 },
+    { code:'01N', name:'* Literature and Libraries', max:2 },
+    { code:'01P', name:'* Symmetry', max:2 },
+  ],
+  '02': [
+    { code:'02A', name:'People', max:2 },
+    { code:'02B', name:'Landscape / Waterscape', max:2 },
+    { code:'02C', name:'Animals / Insects', max:2 },
+    { code:'02D', name:'Still Life', max:2 },
+    { code:'02E', name:'Flowers', max:2 },
+    { code:'02F', name:'Architecture / Structures', max:2 },
+    { code:'02G', name:'Open', max:2 },
+  ],
+  '03': [
+    { code:'03A', name:'People', max:1 },
+    { code:'03B', name:'Landscape / Waterscape', max:1 },
+    { code:'03C', name:'Animals / Insects', max:1 },
+    { code:'03D', name:'Still Life', max:1 },
+    { code:'03E', name:'Flowers', max:1 },
+    { code:'03F', name:'Architecture / Structures', max:1 },
+    { code:'03G', name:'Open', max:1 },
+  ],
+};
+
+const MAX_TOTAL = 30;
+const selections = {}; // code -> 0|1|2
+
+// ── BUILD ENTRY BUTTONS ───────────────────────────────────────────────────────
+function buildDivision(divId, classes) {
+  const container = document.getElementById(divId);
+  classes.forEach(cls => {
+    selections[cls.code] = 0;
+    const row = document.createElement('div');
+    row.className = 'class-row';
+    row.id = 'row-' + cls.code;
+    row.innerHTML = `
+      <div class="class-info">
+        <span class="class-code">${cls.code}</span>
+        <span class="class-name">${cls.name}</span>
+      </div>
+      <div>
+        <div class="entry-btn-group" id="btns-${cls.code}">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <button class="entry-btn" id="btn1-${cls.code}" onclick="toggleEntry('${cls.code}',1,${cls.max})">1</button>
+            <div class="entry-btn-label">Entry</div>
+          </div>
+          ${cls.max >= 2 ? `
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <button class="entry-btn" id="btn2-${cls.code}" onclick="toggleEntry('${cls.code}',2,${cls.max})">2</button>
+            <div class="entry-btn-label">Entries</div>
+          </div>` : ''}
+        </div>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function toggleEntry(code, val, max) {
+  const current = selections[code];
+  const total = getTotalEntries();
+
+  if (current === val) {
+    // deselect
+    selections[code] = 0;
+  } else {
+    const adding = val - current;
+    if (total + adding > MAX_TOTAL) {
+      alert(`You've reached the maximum of ${MAX_TOTAL} total entries. Please deselect another entry first.`);
+      return;
+    }
+    selections[code] = val;
+  }
+  updateButtons(code, max);
+  updateCounter();
+}
+
+function updateButtons(code, max) {
+  const val = selections[code];
+  const btn1 = document.getElementById(`btn1-${code}`);
+  const btn2 = document.getElementById(`btn2-${code}`);
+  if (btn1) {
+    btn1.className = 'entry-btn' + (val === 1 ? ' selected-1' : val === 2 ? ' selected-2' : '');
+  }
+  if (btn2) {
+    btn2.className = 'entry-btn' + (val === 2 ? ' selected-2' : '');
+    const total = getTotalEntries();
+    btn2.disabled = (val === 0 && total >= MAX_TOTAL);
+  }
+  // disable btn1 if at cap and not selected
+  if (btn1) {
+    const total = getTotalEntries();
+    btn1.disabled = (val === 0 && total >= MAX_TOTAL);
+  }
+}
+
+function getTotalEntries() {
+  return Object.values(selections).reduce((a,b) => a+b, 0);
+}
+
+function updateCounter() {
+  const total = getTotalEntries();
+  document.getElementById('countNum').textContent = total;
+  const pct = (total / MAX_TOTAL) * 100;
+  const bar = document.getElementById('counterBar');
+  bar.style.width = pct + '%';
+  bar.className = 'counter-bar' + (pct >= 100 ? ' full' : pct >= 80 ? ' warn' : '');
+
+  // refresh disabled states
+  Object.keys(selections).forEach(code => {
+    const allCls = Object.values(CLASSES).flat();
+    const cls = allCls.find(c => c.code === code);
+    if (cls) updateButtons(code, cls.max);
+  });
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function goToPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  updateProgress(n);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function updateProgress(n) {
+  for (let i=1; i<=4; i++) {
+    const dot = document.getElementById('dot'+i);
+    dot.className = 'step-dot' + (i < n ? ' done' : i === n ? ' active' : '');
+    dot.textContent = i < n ? '✓' : i;
+  }
+  for (let i=1; i<=3; i++) {
+    const line = document.getElementById('line'+i);
+    line.className = 'step-line' + (i < n ? ' done' : '');
+  }
+}
+
+function goToPage2() {
+  if (!validatePage1()) return;
+  const age = document.getElementById('ageCategory').value;
+
+  // Show/hide youth section based on age selection
+  const isYouth = age.startsWith('Yes');
+  document.getElementById('youth-section').classList.toggle('visible', isYouth);
+
+  // Reset all youth selections first so hidden classes don't carry over
+  ['Y01A','Y01B'].forEach(code => {
+    selections[code] = 0;
+    updateButtons(code, 2);
+  });
+
+  // Show only the eligible youth class row
+  const rowY01A = document.getElementById('row-Y01A');
+  const rowY01B = document.getElementById('row-Y01B');
+  if (rowY01A) rowY01A.style.display = (age === 'Yes - 13 or younger') ? '' : 'none';
+  if (rowY01B) rowY01B.style.display = (age === 'Yes - 14 to 18')       ? '' : 'none';
+
+  goToPage(2);
+}
+
+function goToPage3() {
+  const total = getTotalEntries();
+  if (total === 0) {
+    document.getElementById('error2').classList.add('visible');
+    return;
+  }
+  document.getElementById('error2').classList.remove('visible');
+  buildReview();
+  goToPage(3);
+}
+
+// ── VALIDATION ────────────────────────────────────────────────────────────────
+const FIELD_LABELS = {
+  firstName:      'First Name',
+  lastName:       'Last Name',
+  phone:          'Phone Number',
+  email:          'Email Address',
+  ageCategory:    'Age Category (18 or younger question)',
+  fourhWristband: '4-H Youth Wristband (required for youth participants)',
+  street:         'Street Address',
+  city:           'City',
+  state:          'State',
+  zip:            'Zip Code',
+};
+
+const US_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA',
+  'KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC',
+  'ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY',
+  'DC','PR','GU','VI','AS','MP'];
+
+// ── FORMAT HELPERS ──
+function formatPhone(input) {
+  let digits = input.value.replace(/\D/g, '').slice(0, 10);
+  let formatted = '';
+  if (digits.length === 0)      { formatted = ''; }
+  else if (digits.length <= 3)  { formatted = '(' + digits; }
+  else if (digits.length <= 6)  { formatted = '(' + digits.slice(0,3) + ') ' + digits.slice(3); }
+  else { formatted = '(' + digits.slice(0,3) + ') ' + digits.slice(3,6) + '-' + digits.slice(6); }
+  input.value = formatted;
+  clearFieldError('phone');
+}
+
+function formatState(input) {
+  input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 2);
+  clearFieldError('state');
+}
+
+function formatZip(input) {
+  let raw = input.value.replace(/[^\d]/g, '').slice(0, 9);
+  input.value = raw.length > 5 ? raw.slice(0,5) + '-' + raw.slice(5) : raw;
+  clearFieldError('zip');
+}
+
+// ── BLUR VALIDATORS ──
+function validateEmail() {
+  const val = document.getElementById('email').value.trim();
+  if (val) setFieldError('email', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val));
+}
+
+function validateState() {
+  const val = document.getElementById('state').value.trim().toUpperCase();
+  if (val) setFieldError('state', !US_STATES.includes(val));
+}
+
+function validateZip() {
+  const val = document.getElementById('zip').value.trim();
+  if (val) setFieldError('zip', !/^\d{5}(-\d{4})?$/.test(val));
+}
+
+// ── HELPERS ──
+function setFieldError(id, hasError) {
+  const el = document.getElementById(id);
+  const errSpan = document.getElementById('err-' + id);
+  el.classList.toggle('error', hasError);
+  if (errSpan) errSpan.classList.toggle('visible', hasError);
+}
+
+function clearFieldError(id) {
+  const el = document.getElementById(id);
+  if (el && el.value.trim()) setFieldError(id, false);
+}
+
+function clearError(id) { clearFieldError(id); }
+
+function onAgeCategoryChange() {
+  clearFieldError('ageCategory');
+  const age = document.getElementById('ageCategory').value;
+  const isYouth = age.startsWith('Yes');
+  const fourhRow = document.getElementById('fourh-row');
+  const fourhSelect = document.getElementById('fourhWristband');
+
+  // Show/hide 4-H question
+  fourhRow.style.display = isYouth ? '' : 'none';
+
+  // Reset 4-H selection when hiding
+  if (!isYouth) {
+    fourhSelect.value = '';
+    clearFieldError('fourhWristband');
+    document.getElementById('fourh-hint').style.display = 'none';
+  }
+}
+
+function onFourhChange() {
+  const val = document.getElementById('fourhWristband').value;
+  const hint = document.getElementById('fourh-hint');
+  hint.style.display = val === 'Yes' ? '' : 'none';
+  clearFieldError('fourhWristband');
+}
+
+function validatePage1() {
+  const age = document.getElementById('ageCategory').value;
+  const isYouth = age.startsWith('Yes');
+  const baseRequired = ['firstName','lastName','phone','email','ageCategory','street','city','state','zip'];
+  const required = isYouth ? [...baseRequired, 'fourhWristband'] : baseRequired;
+  const problems = [];
+
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    const val = el.value.trim();
+    let errorMsg = null;
+
+    if (!val) {
+      errorMsg = FIELD_LABELS[id];
+    } else if (id === 'phone' && val.replace(/\D/g,'').length !== 10) {
+      errorMsg = 'Phone Number (must be 10 digits)';
+    } else if (id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) {
+      errorMsg = 'Email Address (invalid format — e.g. jane@example.com)';
+    } else if (id === 'street' && !/\d+\s+\S+/.test(val)) {
+      errorMsg = 'Street Address (must include a house number and street name)';
+    } else if (id === 'state' && !US_STATES.includes(val.toUpperCase())) {
+      errorMsg = 'State (must be a valid 2-letter abbreviation — e.g. OH)';
+    } else if (id === 'zip' && !/^\d{5}(-\d{4})?$/.test(val)) {
+      errorMsg = 'Zip Code (must be 5 digits — e.g. 45177)';
+    }
+
+    if (errorMsg) {
+      setFieldError(id, true);
+      problems.push(errorMsg);
+    } else {
+      setFieldError(id, false);
+    }
+  });
+
+  const errorBox  = document.getElementById('error1');
+  const errorList = document.getElementById('error1List');
+
+  if (problems.length > 0) {
+    errorList.innerHTML = problems.map(n => `<li>${n}</li>`).join('');
+    errorBox.classList.add('visible');
+    const firstError = document.querySelector('#page1 .error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+
+  errorBox.classList.remove('visible');
+  return true;
+}
+
+// ── REVIEW ────────────────────────────────────────────────────────────────────
+function buildReview() {
+  const fields = [
+    ['First Name', 'firstName'], ['Middle Initial', 'middleInitial'],
+    ['Last Name', 'lastName'], ['Phone', 'phone'],
+    ['Email', 'email'], ['Age Category', 'ageCategory'],
+    ['Street', 'street'], ['City', 'city'],
+    ['State', 'state'], ['Zip', 'zip'],
+  ];
+  const personal = document.getElementById('reviewPersonal');
+  personal.innerHTML = fields.map(([label, id]) => {
+    const val = document.getElementById(id).value.trim() || '—';
+    return `<div class="review-item"><div class="rlabel">${label}</div><div class="rval">${val}</div></div>`;
+  }).join('');
+
+  // Division metadata for review headings
+  const DIVISION_NAMES = {
+    'Y01': 'Youth',
+    '01':  'Color',
+    '02':  'Black and White',
+    '03':  'Framed and Matted',
+  };
+
+  const entries = document.getElementById('reviewEntries');
+  const total = getTotalEntries();
+  let html = '';
+
+  // Loop through each division in order
+  Object.entries(CLASSES).forEach(([divKey, classes]) => {
+    const selected = classes.filter(c => selections[c.code] > 0);
+    if (selected.length === 0) return; // skip divisions with no entries
+
+    const divName = DIVISION_NAMES[divKey] || divKey;
+    const divTotal = selected.reduce((sum, c) => sum + selections[c.code], 0);
+
+    html += `
+      <div class="review-division">
+        <div class="review-division-header">
+          <span class="review-div-badge">${divKey}</span>
+          <span class="review-div-name">${divName}</span>
+          <span class="review-div-count">${divTotal} entr${divTotal === 1 ? 'y' : 'ies'}</span>
+        </div>
+        ${selected.map(c => {
+          const n = selections[c.code];
+          return `<div class="review-entry-row">
+            <span><span class="recode">${c.code}</span> &nbsp; ${c.name}</span>
+            <span class="recount ${n===1?'one':''}">${n} entr${n===1?'y':'ies'}</span>
+          </div>`;
+        }).join('')}
+      </div>`;
+  });
+
+  html += `
+    <div class="review-total">
+      <span>Total Entries</span>
+      <strong>${total} / ${MAX_TOTAL}</strong>
+    </div>`;
+
+  entries.innerHTML = html;
+
+  // ── COST ESTIMATE ──
+  const PASS_COST      = 40;
+  const COST_PER_EXTRA = 2;
+
+  const has4H       = document.getElementById('fourhWristband').value === 'Yes';
+  const freeEntries = has4H ? 10 : 15;
+
+  const extraEntries = Math.max(0, total - freeEntries);
+  const extraCost    = extraEntries * COST_PER_EXTRA;
+  const grandTotal   = has4H ? extraCost : PASS_COST + extraCost;
+
+  // Show/hide the pass cost line depending on pass type
+  const passLine = document.getElementById('passLine');
+  if (passLine) passLine.style.display = has4H ? 'none' : '';
+
+  // Update free entries label
+  const freeLabel = document.querySelector('.cost-line:nth-child(2) .cost-val');
+  if (freeLabel) freeLabel.textContent = freeEntries + ' free';
+  const freeLabelText = document.querySelector('.cost-line:nth-child(2) .cost-label');
+  if (freeLabelText) freeLabelText.textContent = has4H
+    ? 'Free entries included with 4-H Wristband'
+    : 'Free entries included with Season Pass / Fair Membership Pass';
+
+  document.getElementById('extraCount').textContent = extraEntries;
+  document.getElementById('extraCost').textContent  = '$' + extraCost.toFixed(2);
+  document.getElementById('estimatedTotal').textContent = '$' + grandTotal.toFixed(2);
+
+  // Update total label
+  const totalLabel = document.querySelector('.cost-total span:first-child');
+  if (totalLabel) totalLabel.textContent = has4H
+    ? 'Estimated Additional Entry Fees Due at Drop-Off'
+    : 'Estimated Total Due at Drop-Off';
+
+  // Dim the extra-entries line if there are none
+  const extraLine = document.getElementById('extraEntriesLine');
+  if (extraLine) {
+    extraLine.style.opacity = extraEntries === 0 ? '0.45' : '1';
+  }
+
+  // Update wristband reminder in drop-off section
+  const wristbandNote = document.getElementById('wristband-reminder');
+  if (wristbandNote) wristbandNote.style.display = has4H ? '' : 'none';
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────────────────
+// 🔧 REPLACE THIS URL with your deployed Google Apps Script Web App URL
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcLt6DSFyBCT9w9jJLRTU2g6FC5sNTrtwqodKwNPuAXes8BLk3_r8-bzjT0_RHaQhM7w/exec';
+
+async function submitForm() {
+  const btn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('spinner');
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+
+  const allCls = Object.values(CLASSES).flat();
+  const entryList = allCls
+    .filter(c => selections[c.code] > 0)
+    .map(c => `${c.code}:${selections[c.code]}`)
+    .join(', ');
+
+  const payload = {
+    firstName: document.getElementById('firstName').value.trim(),
+    middleInitial: document.getElementById('middleInitial').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    ageCategory:    document.getElementById('ageCategory').value,
+    fourhWristband: document.getElementById('fourhWristband').value || 'N/A',
+    street: document.getElementById('street').value.trim(),
+    city: document.getElementById('city').value.trim(),
+    state: document.getElementById('state').value.trim(),
+    zip: document.getElementById('zip').value.trim(),
+    entries: entryList,
+    totalEntries: getTotalEntries(),
+    submittedAt: new Date().toISOString(),
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    // Reset button before moving to success page
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    goToPage(4);
+  } catch (err) {
+    document.getElementById('error3').classList.add('visible');
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  }
+}
+
+// ── NEW ENTRY / RESET ────────────────────────────────────────────────────────
+function startNewEntry(keepContactInfo) {
+  // Save contact fields if requested
+  const saved = {};
+  if (keepContactInfo) {
+    ['phone','email','street','city','state','zip'].forEach(id => {
+      saved[id] = document.getElementById(id).value;
+    });
+  }
+
+  // Reset all personal info fields
+  ['firstName','middleInitial','lastName','phone','email',
+   'ageCategory','fourhWristband','street','city','state','zip'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.classList.remove('error'); }
+  });
+
+  // Clear all inline error spans
+  document.querySelectorAll('.field-error').forEach(el => el.classList.remove('visible'));
+  document.getElementById('error1').classList.remove('visible');
+
+  // Hide 4-H row and reset it
+  document.getElementById('fourh-row').style.display = 'none';
+  document.getElementById('fourh-hint').style.display = 'none';
+
+  // Reset all entry selections
+  Object.keys(selections).forEach(code => { selections[code] = 0; });
+  const allCls = Object.values(CLASSES).flat();
+  allCls.forEach(cls => updateButtons(cls.code, cls.max));
+  updateCounter();
+
+  // Re-apply saved contact info if keeping
+  if (keepContactInfo) {
+    Object.entries(saved).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    });
+  }
+
+  // Go back to page 1
+  goToPage(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+buildDivision('div-Y01', CLASSES['Y01']);
+buildDivision('div-01',  CLASSES['01']);
+buildDivision('div-02',  CLASSES['02']);
+buildDivision('div-03',  CLASSES['03']);
+</script>
+<footer>
+  <p>
+    <strong style="color:#ffffff">Clinton County Agricultural Society</strong><br>
+    958 W Main Street &nbsp;&bull;&nbsp; PO Box 29 &nbsp;&bull;&nbsp; Wilmington, OH 45177 &nbsp;&bull;&nbsp; 937-382-4443
+  </p>
+  <p style="margin-top:0.5rem">&copy;2026 Clinton County Agricultural Society &nbsp;&bull;&nbsp; <a href="https://clintoncountyfairgrounds.com">clintoncountyfairgrounds.com</a></p>
+</footer>
+</body>
+</html>
